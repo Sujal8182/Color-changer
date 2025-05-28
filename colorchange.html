@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Color Change</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      padding-bottom: 60px;
+      transition: background-image 0.6s ease-in-out;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      animation: gradientShift 10s ease infinite;
+      background-size: 400% 400%;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    button {
+      padding: 15px 35px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 40px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+
+    button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      color: #000;
+      border: 1px solid #fff;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    #info {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body id="body">
+  <p id="info"></p>
+  <button onclick="change()">Change Background</button>
+
+  <script>
+    let body = document.getElementById("body");
+    let info = document.getElementById("info");
+
+    function change() {
+      let x = Math.floor(Math.random() * 255);
+      let y = Math.floor(Math.random() * 255);
+      let z = Math.floor(Math.random() * 255);
+      let n = Math.floor(Math.random() * 360);
+      let a = Math.floor(Math.random() * 100);
+      let b = Math.floor(Math.random() * 100);
+      let c = Math.floor(Math.random() * 100);
+
+      body.style.backgroundImage = `linear-gradient(${n}deg, rgba(${x}, ${y}, ${z}, 0.8) ${a}%, rgba(${z}, ${y}, ${x}, 1) ${b}%, rgba(${y}, ${z}, ${x}, 1) ${c}%)`;
+      
+      info.innerText = ` Angle: ${n}° | Colors: rgba(${x},${y},${z}), rgba(${z},${y},${x}), rgba(${y},${z},${x})`;
+    }
+  </script>
+</body>
+</html>
